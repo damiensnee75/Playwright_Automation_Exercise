@@ -93,7 +93,7 @@ test.describe('Details page field validation tests', () => {
     await expect(registerPage.companyNameInvalidText).toBeVisible();
   });
 
-  test('Ensure Company Type dropdown entries are correct and Other displays What type of company field', async ({ registerPage, page }) => {
+  test('Ensure Company Type dropdown entries are correct and Other displays What type of company field', async ({ registerPage }) => {
     // Click Company Type dropdown and confirm all expected options are present
     await registerPage.companyTypeDropdown.click();
     await expect(registerPage.companyTypeOptions).toHaveCount(3);
@@ -170,7 +170,7 @@ test.describe('Details page field validation tests', () => {
     };
   });
 
-  test('Ensure confirm password matching rule is enforced', async ({ registerPage, page }) => {
+  test('Ensure confirm password matching rule is enforced', async ({ registerPage }) => {
     // Enter valid password and valid confirm password that do not match
     await registerPage.passwordInput.fill('Valid1234!');
     await registerPage.confirmPasswordInput.fill('Mismatch1!');

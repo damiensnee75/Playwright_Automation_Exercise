@@ -28,6 +28,7 @@ export class RegisterPage {
     readonly passwordLabel: Locator;
     readonly passwordInput: Locator;
     readonly passwordErrorText: Locator;
+    readonly passwordMismatchText: Locator;
     readonly confirmPasswordLabel: Locator;
     readonly confirmPasswordInput: Locator;
     readonly confirmPasswordErrorText: Locator;
@@ -71,6 +72,7 @@ export class RegisterPage {
         this.passwordLabel = page.getByText('Password: * Required', { exact: true });
         this.passwordInput = page.getByRole('textbox', { name: 'Password: * Required', exact: true });
         this.passwordErrorText = page.getByText('Password is Required');
+        this.passwordMismatchText = page.getByText('Passwords do not match');
         //Confirm Password locators
         this.confirmPasswordLabel = page.getByText('Confirm Password: * Required');
         this.confirmPasswordInput = page.getByRole('textbox', { name: 'Confirm Password: * Required' });

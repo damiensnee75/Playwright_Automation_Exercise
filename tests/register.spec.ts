@@ -1,5 +1,5 @@
 import { test as base, expect } from '@playwright/test';
-import { RegisterPage } from '../pages/register';
+import { RegisterPage } from '../pom/register';
 import { fieldLengthStrings, invalidCharacterStrings, invalidPasswordsAndErrors } from '../test-data/inputStrings';
 type MyFixtures = { registerPage: RegisterPage };
 
@@ -42,9 +42,11 @@ test.describe('Details page field validation tests', () => {
     await expect(registerPage.acceptTandCsErrorText).toBeVisible();
   });
 
-  // test marked as expected to fail (test.fail) where validation is not yet implemented
+  // tests that are expected to fail can be marked test.fail for functionality yet to be implemented
+  // but could be confusing for this exercise
+
   // would need to know the exact max length
-  test.fail('Ensure max field length validation of user name', async ({ registerPage }) => {
+  test('VALIDATION NOT IMPLEMENTED: Ensure max field length validation of user name', async ({ registerPage }) => {
     // Enter 256 characters in Your Name field and click Next
     await registerPage.yourNameInput.fill(fieldLengthStrings.length256);
     await registerPage.nextButton.click();
@@ -58,9 +60,8 @@ test.describe('Details page field validation tests', () => {
     await expect(registerPage.yourNameInvalidText).not.toBeVisible();
   });;
 
-  // test marked as expected to fail (test.fail) where validation is not yet implemented
   // would need to know the special characters considered invalid
-  test.fail('Ensure special character validation of user name', async ({ registerPage }) => {
+  test('VALIDATION NOT IMPLEMENTED: Ensure special character validation of user name', async ({ registerPage }) => {
     // Enter special characters in Your Name field and click Next
     await registerPage.yourNameInput.fill(invalidCharacterStrings.specialChars);
     await registerPage.nextButton.click();
@@ -68,9 +69,8 @@ test.describe('Details page field validation tests', () => {
     await expect(registerPage.yourNameInvalidText).toBeVisible();
   });
 
-  // test marked as expected to fail (test.fail) where validation is not yet implemented
   // would need to know the exact max length 
-  test.fail('Ensure max field length of company name', async ({ registerPage }) => {
+  test('VALIDATION NOT IMPLEMENTED: Ensure max field length of company name', async ({ registerPage }) => {
     // Enter 256 characters in Your Name field and click Next
     await registerPage.companyNameInput.fill(fieldLengthStrings.length256);
     await registerPage.nextButton.click();
@@ -84,9 +84,8 @@ test.describe('Details page field validation tests', () => {
     await expect(registerPage.companyNameInvalidText).not.toBeVisible();
   });
 
-  // test marked as expected to fail (test.fail) where validation is not yet implemented
   // would need to know the special characters considered invalid
-  test.fail('Ensure special character validation of company name', async ({ registerPage }) => {
+  test('VALIDATION NOT IMPLEMENTED: Ensure special character validation of company name', async ({ registerPage }) => {
     // Enter special characters in Your Name field and click Next
     await registerPage.companyNameInput.fill(invalidCharacterStrings.specialChars);
     await registerPage.nextButton.click();
@@ -114,9 +113,9 @@ test.describe('Details page field validation tests', () => {
     await expect(registerPage.whatTypeOfCompanyInput).toBeVisible();
   });
 
-  // appears to be additional rules around email format validation that are
+  // there appear to be additional rules around email format validation that are
   // not documented but did not reach an overall field length limit
-  test.fail('Ensure max field length of user email', async ({ registerPage }) => {
+  test('NOT IMPLEMENTED: Ensure max field length of user email', async ({ registerPage }) => {
     // Enter 256 characters in Your Name field and click Next
     await registerPage.userEmailInput.fill('a'.repeat(256) + '@test.com');
     await registerPage.nextButton.click();
@@ -176,7 +175,7 @@ test.describe('Details page field validation tests', () => {
     await registerPage.passwordInput.fill('Valid1234!');
     await registerPage.confirmPasswordInput.fill('Mismatch1!');
     await registerPage.nextButton.click();
-    await expect(page.getByText('Passwords do not match')).toBeVisible();
+    await expect(registerPage.passwordMismatchText).toBeVisible();
     await registerPage.confirmPasswordInput.clear();
     
     // Enter a matching confirm password and ensure no validation message is shown
@@ -227,7 +226,6 @@ test.describe('Happy path details page form completion', () => {
     await registerPage.confirmPasswordInput.fill('Valid1234!');
     await registerPage.acceptTandCsCheckbox.check();
     await registerPage.nextButton.click();
-    await page.waitForLoadState('domcontentloaded');
     // Confirm navigation to the next page by checking for a unique element on that page
     await expect(page.getByRole('heading', { name: 'Upload feeds' })).toBeVisible();
   });   

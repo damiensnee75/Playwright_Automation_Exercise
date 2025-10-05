@@ -48,7 +48,7 @@ In a terminal, navigate to a location to clone the project to.
 
 Tests are configured to run on Chrome, Firefox and Webkit browsers. This can be changed in playwright.config.ts.
 
-<ins>**NOTE:**</ins> Tests have been written for validation that has not yet been implemented. In register.spec.ts, tests that fall into this category have been marked test.fail. They still run but are expected to fail (and will show as pass in results).
+<ins>**NOTE:**</ins> Tests have been written for validation that has not yet been implemented. These tests currently fail. As these are tests for functionality that has not yet been delivered, they would be expected to fail. In register.spec.ts, these failing tests could be marked test.fail. They would still run but fail, but because they would be expected to fail they would be marked as passed in test results.
 
 ## Reporting
 
